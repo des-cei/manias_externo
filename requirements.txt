@@ -1,0 +1,5 @@
+numpy
+matplotlib
+tqdm
+tonic
+brian2

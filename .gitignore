@@ -1,0 +1,6 @@
+.venv
+*/__pycache__/
+Data/recordings
+Data/NTIDIGITS18
+
+
