@@ -3,3 +3,4 @@ matplotlib
 tqdm
 tonic
 brian2
+pandas
