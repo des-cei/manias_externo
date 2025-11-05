@@ -31,18 +31,18 @@ La carpeta contiene los siguientes submodulos:
 
 ## 4. Archivos
 
-En la carpeta principal hay 2 archivos:
+En la carpeta principal hay 3 archivos:
 - <strong>tutorialEballena.ipynb</strong> el cual contiene un ejemplo minimalista de como usar el simulador eBallena. Se
     recomienda leer el documento documentacioneballena.pdf para complementar.
 - <strong>baselinelsm.ipynb</strong> el cual contiene un ejemplo con una liquid state machine resoviendo el problema FSDD.
+- <strong>recopilacion_datos_subrogado.ipynb</strong> el cual contiene un script para generar datos de ejecuciones de una LSM con el objetivo estudiar la posibilidad de entrenar modelos subrogados.
     
-November 3, 2025
 ## 5. Documentos
 
 En la carpeta documentacion hay 3 documentos.
 
 - <strong>descargaFSDD.pdf</strong> , con instrucciones de como descargar los audios de FSDD.
-- <strong>modelolsm.pdf</strong> , con detalles del modelo de Liquid State Machine implementado.
+- <strong>uso_datos_subrogado.pdf</strong> , con detalles del modelo de Liquid State Machine implementado.
 - <strong>documentacion_eballena.ipynb</strong> , con detalles de la implementación del simulador.
     
 ## 6. Contacto
