@@ -72,14 +72,17 @@ class eBallena:
 			return Config(n_neu,n_inputs,threshold,v_rest, tau, refractory_time, syn_delay, coda, max_sim_time)
 
 	def createInputsRaw(instance):	# INSTANCE=(TIME,IDX)
-		instance = sorted( instance, key=lambda item:item[0], reverse=True ) # LOS TIEMPOS DEBEN VENIR AL REVES
-		times,pre = zip(*instance)
+		if len(instance):
+			instance = sorted( instance, key=lambda item:item[0], reverse=True ) # LOS TIEMPOS DEBEN VENIR AL REVES
+			times,pre = zip(*instance)
 
-		len_inputs = len(pre)
-		return InputsRaw(
-			len   = len_inputs,
-			pre   = (ctypes.c_int*len_inputs)(*pre),
-			times = (ctypes.c_float*len_inputs)(*times))
+			len_inputs = len(pre)
+			return InputsRaw(
+				len   = len_inputs,
+				pre   = (ctypes.c_int*len_inputs)(*pre),
+				times = (ctypes.c_float*len_inputs)(*times))
+		else:
+			return InputsRaw(len=0)
 
 
 	def createSynapsesRaw(synapses):	# SYNAPSES = (PRE,POST,W)
