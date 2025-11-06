@@ -153,7 +153,7 @@ class eBallena:
 		mode	     : SPIKES | VOLTAGES | STATE
 		"""
 		if len(instance):	assert np.array(instance)[:,1].max() < config.n_inputs,'Hay input_idx mayores a los declarados en config'
-		if len(syn_in):		assert np.array(syn_in)[:,:2].max() < config.n_neu, 'Hay neu_idx mayores a los declarados en config'
+		if len(syn_in):		assert np.array(syn_in)[:,1].max() < config.n_neu, 'Hay neu_idx mayores a los declarados en config'
 		if len(syn_re):		assert np.array(syn_re)[:,:2].max() < config.n_neu, 'Hay neu_idx mayores a los declarados en config'
 
 		inputs_raw = eBallena.createInputsRaw(instance)
