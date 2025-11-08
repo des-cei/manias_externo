@@ -112,13 +112,12 @@ class eBallena:
 			voltages = voltages.contents.next
 		return np.array(voltages_parsed)
 
-	def parseSpikes(spikes):
+	def parseSpikes(spikes):	# (TIME,IDX)
 		spikes_parsed = []
 		while spikes:
 			spike = ctypes.cast( spikes.contents.data, ctypes.POINTER(SpikeMarker) ).contents
-			spikes_parsed.append( (spike.neu, spike.time) )
+			spikes_parsed.append( (spike.time,spike.neu) )
 			spikes = spikes.contents.next
-
 		return spikes_parsed
 
 
