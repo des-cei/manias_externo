@@ -141,7 +141,7 @@ class eBallena:
 	def getState(spikes, config):
 		state = np.array([0 for _ in range(config.n_neu)])
 		for spike in spikes:
-			state[spike[0]] += 1
+			state[spike[1]] += 1
 		return state
 
 	# =============
