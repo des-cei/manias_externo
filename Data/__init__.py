@@ -1,3 +1,3 @@
-from .Data import TIDIGITS, FSDD
+from .Data import FSDD
 
-__all__= ['TIDIGITS', 'FSDD']
+__all__= ['FSDD']
