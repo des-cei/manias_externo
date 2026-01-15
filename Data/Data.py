@@ -70,12 +70,19 @@ class FSDD:
 		data   = np.array(data)
 		target = np.array(target)
 
-		d_scale, d_util, t_scale, t_util = train_test_split(data,target,test_size=0.8, random_state=random_state, shuffle=True)
+		# SEPARAR DATOS PARA REALIZAR ESCALADO Y DATOS UTILES QUE PARTICIPARAN DEL PROCESO
+		d_scale, d_util, t_scale, t_util = train_test_split(data,target,test_size=0.9, random_state=random_state, shuffle=True, stratify=target)
 		d_scale, d_util = self.normalizeData(d_scale, d_util)
+
+		# CONVERTIR LOS DATOS UTILES EN SPIKES
 		d_util = [ self.binFrecsToSpikeSeries(instance, self.time_bin, self.max_spikes) for instance in d_util ]
+		
+		# CON LOS SPIKES UTILES HACER TRAIN TEST SPLIT
+		d_train, d_test, t_train, t_test = train_test_split(d_util, t_util, test_size=0.8, random_state=random_state, stratify=t_util)
+		
 
 		# GENERAR K-FOLD
-		idx_kfold = np.arange(len(d_util))
+		idx_kfold = np.arange(len(d_train))
 		idx_kfold = shuffle(idx_kfold, random_state=random_state)
 		b = np.linspace(0,len(idx_kfold),k+1, dtype=np.int32)
 
@@ -87,18 +94,22 @@ class FSDD:
 		folds = []
 		for i in range(k):
 			folds.append({
-				'd':[d_util[idx] for idx in folds_idx[i]],
-				't':[t_util[idx] for idx in folds_idx[i]]
+				'd':[d_train[idx] for idx in folds_idx[i]],
+				't':[t_train[idx] for idx in folds_idx[i]]
 			})
 
 		# SAVE
 		with open('Data/fsdd_procesado.pickle','wb') as file:
-			pickle.dump( folds, file )
+			pickle.dump( {'folds':folds,
+				 		  'train':{'d':d_train, 't':t_train},
+						  'test' :{'d':d_test,  't':t_test}}, file )
 
 	def load(self):
 		with open('Data/fsdd_procesado.pickle','rb') as file:
-			folds = pickle.load(file)
-		self.folds 	= folds
+			data_saved = pickle.load(file)
+		self.folds 	= data_saved['folds']
+		self.train  = data_saved['train']
+		self.test   = data_saved['test']
 		return self
 	
 	def getFolds(self):

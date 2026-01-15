@@ -94,7 +94,7 @@ def simulacionBrian2Voltages( config, instance, syn_in, syn_re):
 #  GENERAR RESERVOIRS
 # ====================
 
-def generateReservoir(num_neuron=1000,prob_exitatory=0.8, L=3, c_ie=0.05):
+def generateReservoir(num_neuron=1000,prob_exitatory=0.8, L=3, c_ee=0.2, c_ei=0.1, c_ie=0.05, c_ii=0.3):
 	assert round(num_neuron**(1/3))**3 == num_neuron, 'num_ neuron debe ser un cubo'
 
 	# GENERATE NEURON POSITIONS AND TYPE (EX, INH)
@@ -118,10 +118,10 @@ def generateReservoir(num_neuron=1000,prob_exitatory=0.8, L=3, c_ie=0.05):
 
 				euclidian_dist = ((position_pre-position_post)**2).sum()**0.5
 				
-				if pre_exitatory and post_exitatory:			C=0.2
-				elif pre_exitatory and not post_exitatory:		C=0.1
+				if pre_exitatory and post_exitatory:			C=c_ee
+				elif pre_exitatory and not post_exitatory:		C=c_ei
 				elif not pre_exitatory and post_exitatory:		C=c_ie
-				elif not pre_exitatory and not post_exitatory:	C=0.3
+				elif not pre_exitatory and not post_exitatory:	C=c_ii
 
 				prob_connection = C*np.exp( -(euclidian_dist/L)**2 )
 				if np.random.random() < prob_connection:
