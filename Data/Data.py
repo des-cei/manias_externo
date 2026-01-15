@@ -78,7 +78,7 @@ class FSDD:
 		d_util = [ self.binFrecsToSpikeSeries(instance, self.time_bin, self.max_spikes) for instance in d_util ]
 		
 		# CON LOS SPIKES UTILES HACER TRAIN TEST SPLIT
-		d_train, d_test, t_train, t_test = train_test_split(d_util, t_util, test_size=0.8, random_state=random_state, stratify=t_util)
+		d_train, d_test, t_train, t_test = train_test_split(d_util, t_util, train_size=0.8, random_state=random_state, stratify=t_util)
 		
 
 		# GENERAR K-FOLD
